@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta name="format-detection" content="telephone=no"> -->
+    <title>极光租房管理</title>
+    <!--    <link rel="stylesheet" href="css/bootstrap.min.css">-->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" >
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery.serializeJSON/3.1.1/jquery.serializejson.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" ></script>
+    <!-- cdn导入-->
+    <!-- &lt;!&ndash; 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 &ndash;&gt;-->
+    <!-- &lt;!&ndash;	&lt;!&ndash; jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) &ndash;&gt;&ndash;&gt;-->
+
+    <!-- 引入bootstrap样式 -->
+    <!--    <link href="source/css/bootstrap.css" rel="stylesheet">-->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入bootstrap-table样式 -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-table/1.1.4/bootstrap-table.min.css" rel="stylesheet">
+    <!-- jquery -->
+
+
+    <!-- bootstrap-table.min.js -->
+    <!--    <script src="source/js/bootstrap-table.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.0/bootstrap-table.min.js"></script>
+    <!-- 引入中文语言包 -->
+    <!--    <script src="source/css/bootstrap-table-zh-CN.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.0/locale/bootstrap-table-zh-CN.min.js"></script>
+    <!--    <script src="js/jquery-3.4.1.js"></script>-->
+
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/bootstrap-select/1.14.0-beta/css/bootstrap-select.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-select/1.14.0-beta/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/bootstrap-select/1.14.0-beta/js/i18n/defaults-zh_CN.min.js"></script>
+
+
+    <script>
+        $(function() {
+            $(".toggle-btn").click(function() {
+                $("#leftMeun").toggleClass("show");
+                $("#rightContent").toggleClass("pd0px");
+            })
+        })
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/slide.css"/>
+<!--    <link rel="stylesheet" type="text/css" href="/css/stepBar1.css"/>-->
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/flat-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.nouislider.css">
+
+    <style>
+        .table-thead {
+            width: 50px !important;
+        }
+
+        /*#magnetLinksTable tr td{*/
+        /*}*/
+
+        table {
+            table-layout: fixed;
+        }
+
+        #magnetLinksTable td {
+            width: 10% !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        #magnetLinksTable th {
+            width: 10% !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        #magnetLinksTable td:nth-child(1) {
+            width: 5% !important;
+        }
+
+        #magnetLinksTable td:nth-child(2) {
+            width: 5% !important;
+        }
+
+        #magnetLinksTable td:nth-child(3) {
+            width: 15% !important;
+        }
+
+        #magnetLinksTable th:nth-child(1) {
+            width: 5% !important;
+        }
+
+        #magnetLinksTable th:nth-child(2) {
+            width: 5% !important;
+        }
+
+        #magnetLinksTable th:nth-child(3) {
+            width: 15% !important;
+        }
+
+        #params-table td span {
+            width: 133px !important;
+        }
+
+        #params-table td .bootstrap-select span {
+            width: 6px !important;
+        }
+
+        #params-table tbody {
+            width: 160px !important;
+        }
+
+        .row, td, th {
+            background-color: white !important;
+            /*border-top-color: white !important;*/
+            border: none !important;
+        }
+
+        /*tr {*/
+        /*    margin: 50px !important;*/
+        /*}*/
+
+        td.spanTd {
+            text-align: right;
+        }
+
+        .spanTd{
+            text-align: right !important;
+        }
+
+        #logoDiv {
+            background-color: rgba(0, 35, 67, 0.83) !important;
+            color: whitesmoke !important;
+        }
+
+        .leftMeun {
+            background-color: #001529 !important;
+            color: whitesmoke !important;
+        }
+
+        #roleTableRentRequest tbody tr td:first-child{
+            width: 10% !important;
+        }
+
+        #roleTableRentRequest tbody tr th:first-child{
+            width: 20px !important;
+        }
+        .like {
+            margin-right: 10px;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+<div id="wrap" class="container-fluid">
+    <!-- 左侧菜单栏目块 -->
+    <div class="leftMeun" id="leftMeun">
+        <div id="logoDiv">
+            <p id="logoP"><img id="logo" alt="极光租房管理端"
+                               src="/images/Aicon.png"><span>极光租房管理端</span>
+            </p>
+        </div>
+        <div id="personInfor" >
+            <p id="userName">Aurora Magnet</p>
+            <p><span th:text="'928946604@qq.com, ' + ${model.user} + '!'"> </span></p>
+<!--            <p><span>928946604@qq.com  th:text="*{id}" </span></p>-->
+            <p>
+                <a>退出登录</a>
+            </p>
+        </div>
+
+        <div class="meun-title">账号管理</div>
+        <div class="meun-item" id="userManager" href="#user" aria-controls="user" role="tab" data-toggle="tab">
+            <img src="/images/icon_user_grey.png">用户管理
+        </div>
+
+        <div class="meun-item" id="addNewRentResource1" href="#houseResParams1" aria-controls="houseResParams1" role="tab" data-toggle="tab"><img
+                src="/images/icon_change_grey.png">房源参数设置
+        </div>
+
+
+        <div class="meun-title">房源管理</div>
+        <div class="meun-item active" id="seeHouseManager" href="#VisitRequestModel" aria-controls="VisitRequestModel" role="tab" data-toggle="tab">
+            <img src="/images/icon_user_grey.png">看房请求
+        </div>
+
+        <div class="meun-item" id="rentRequestManager" href="#RentRequestModel" aria-controls="RentRequestModel" role="tab" data-toggle="tab"><img
+                src="/images/icon_user_grey.png">租房请求
+        </div>
+
+        <div class="meun-item active" id="rentListManager" href="#user" aria-controls="user" role="tab" data-toggle="tab">
+            <img src="/images/icon_user_grey.png">出租列表
+        </div>
+        <div class="meun-item active" id="addNewRentResource" href="#houseResParams" aria-controls="houseResParams" role="tab" data-toggle="tab"><img
+                src="/images/icon_change_grey.png">新增房源
+        </div>
+
+
+        <div class="meun-title">房东管理</div>
+
+        <div class="meun-item active" id="landlordsManager" href="#landlordModel" aria-controls="landlordModel" role="tab" data-toggle="tab">
+            <img src="/images/icon_user_grey.png">房东列表
+        </div>
+
+
+
+    </div>
+
+    <!-- 右侧具体内容栏目 -->
+    <div id="rightContent" class="">
+        <a class="toggle-btn" id="nimei">
+            <i class="glyphicon glyphicon-align-justify">
+
+            </i>
+        </a>
+        <!-- Tab panes -->
+        <div class="tab-content">
+
+            <!--用户管理模块-->
+            <div role="tabpanel" class="tab-pane active" id="user">
+                <div class="check-div form-inline">
+                    <div class="col-xs-2">
+                        <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addUser">添加用户</button>
+                    </div>
+
+                    <div class="col-xs-3 hidden-xs hidden-sm hidden-md">
+                        <div class="col-xs-5"><span>查询项目:&nbsp;</span></div>
+                        <label>
+                            <div style="display: inline" class="hidden-xs hidden-sm hidden-md">
+                                <select class=" form-control" id="searchSelect">
+                                    <option value="nofield">模糊查询</option>
+                                    <option value="id">用户id</option>
+                                    <option value="email">用户邮箱</option>
+                                    <option value="phone">用户手机</option>
+                                </select>
+                            </div>
+                        </label>
+
+                    </div>
+
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control input-sm" placeholder="输入文字搜索" id="SearchContent">
+                        <button class="btn btn-white btn-xs " id="btnSearch" onclick="showSearchUserInfo();">查 询
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 可以改用列表 -->
+                <!--表格列表-->
+                <div class="panel panel-default panel-bs-table-myself-style">
+                    <div class="panel-heading" id="cur_dir">用户列表</div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover text-nowrap" id="bs-table-list-myself">
+                                <!--table-bordered-->
+                                <thead class="w-100">
+                                <tr class="table-thead row">
+                                    <th class="col-2">#</th>
+                                    <th class="col-1">用户id</th>
+                                    <th class="col-1">用户姓名</th>
+                                    <th class="col-1">密码</th>
+                                    <th class="col-3">手机</th>
+                                    <th class="col-4">身份证</th>
+                                    <th class="col-1">职业信息&nbsp;<span class="glyphicon glyphicon-arrow-down small"></span> </th>
+                                    <th class="col-1">是否已认证</th>
+                                    <th class="col-1">是否房东</th>
+                                    <th class="col-1">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody id="table_body" class="w-100">
+                                <tr class="row">
+                                    <td class="col-1">id</td>
+                                    <td class="col-1">name</td>
+                                    <td class="col-1">123</td>
+                                    <td class="col-3">13202561009</td>
+                                    <td class="col-4">9289XXXXXX</td>
+                                    <td class="col-1">职业（学生）</td>
+                                    <td class="col-1">否</td>
+                                    <td class="col-1">否</td>
+                                    <td class="col-1">
+                                        <button class="btn btn-success btn-xs" data-toggle="modal" id="btnUserDetail"
+                                                data-target="#userDetail"
+                                                onclick="javascript:void(0);"
+                                        >查看详情
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!--弹出添加用户窗口-->
+                <div class="modal fade" id="addUser" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">添加用户</h4>   <!--id="gridSystemModalLabel"-->
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal">
+                                        <div class="form-group ">
+                                            <label for="uName" class="col-xs-3 control-label">用户名：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm align" id="uName"
+                                                       placeholder="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="uPsw" class="col-xs-3 control-label">用户密码：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm align" id="uPsw"
+                                                       placeholder="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="uEmail" class="col-xs-3 control-label">电子邮箱：</label>
+                                            <div class="col-xs-8">
+                                                <input type="email" class="form-control input-sm align" id="uEmail"
+                                                       placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="uPhone" class="col-xs-3 control-label">电话：</label>
+                                            <div class="col-xs-8">
+                                                <input type="" class="form-control input-sm align" id="uPhone"
+                                                       placeholder="">
+                                            </div>
+                                        </div>
+
+                                        <!--                                        <div class="form-group">-->
+                                        <!--                                            <label class="col-xs-3 control-label">权限：</label>-->
+                                        <!--                                            <div class="col-xs-8">-->
+                                        <!--                                                <select class=" form-control select-duiqi">-->
+                                        <!--                                                    <option value="">管理员</option>-->
+                                        <!--                                                    <option value="">普通用户</option>-->
+                                        <!--                                                </select>-->
+                                        <!--                                            </div>-->
+                                        <!--                                        </div>-->
+                                        <!--                                        <div class="form-group">-->
+                                        <!--                                            <label class="col-xs-3 control-label">状态：</label>-->
+                                        <!--                                            <div class="col-xs-8">-->
+                                        <!--                                                <label class="control-label">-->
+                                        <!--                                                    <input type="radio" name="situation" id="normalState2">正常</label>-->
+                                        <!--                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                        <!--                                                <label class="control-label">-->
+                                        <!--                                                    <input type="radio" name="situation" id="forbidState2"> 禁用</label>-->
+                                        <!--                                            </div>-->
+                                        <!--                                        </div>-->
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green">保 存</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+                <!--弹出修改用户窗口-->
+                <div class="modal fade" id="reviseUser" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改用户(id：
+                                    <span id="chUserInfoSpan"></span>)</h4>   <!--id="gridSystemModalLabel"-->
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal">
+                                        <div class="form-group ">
+                                            <label for="UserInfoName" class="col-xs-3 control-label">用户名：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="email" class="form-control input-sm align"
+                                                       id="UserInfoName" placeholder="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label for="UserInfoPsw" class="col-xs-3 control-label">用户密码：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm align" id="UserInfoPsw"
+                                                       placeholder="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="UserInfoMail" class="col-xs-3 control-label">电子邮箱：</label>
+                                            <div class="col-xs-8">
+                                                <input type="" class="form-control input-sm align" id="UserInfoMail"
+                                                       placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="UserInfoPhone" class="col-xs-3 control-label">电话：</label>
+                                            <div class="col-xs-8">
+                                                <input type="" class="form-control input-sm align" id="UserInfoPhone"
+                                                       placeholder="">
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green" id="btnChangeUserInfo">确 认</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+                <!--弹出删除用户警告窗口-->
+                <div class="modal fade" id="deleteUser" role="dialog" aria-labelledby="gridSystemModalLabel"
+                     style="margin-top: 200px;">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    确定要删除该用户（<span id="delUserIdSpan"></span>）？删除后不可恢复！
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn  btn-xs btn-danger" id="btnDelUserSure">确 认</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
+            </div>    <!--用户管理模块-->
+
+
+
+
+            <!--弹出用户详情窗口-->
+            <div class="modal fade" id="userDetail" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">租客详情</h4>   <!--id="gridSystemModalLabel"-->
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row control-label" style="font-size: 15px; padding-left: 10px;"><span class="glyphicon glyphicon-info-sign small"></span>基本信息</div>
+
+                            <div class="container-fluid">
+                                    <div class="row">
+                                        <label for="uName" class="col-xs-2 control-label">姓名：</label>
+                                        <div class="col-xs-3 ">
+                                            张天
+                                        </div>
+
+                                        <label for="uName" class="col-xs-2 control-label">倪称：</label>
+                                        <div class="col-xs-3 ">
+                                            张三
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <label for="uEmail" class="col-xs-2 control-label">性别：</label>
+                                        <div class="col-xs-3 ">
+                                            xxxx@qq.com
+                                        </div>
+                                        <label for="uPhone" class="col-xs-2 control-label">籍贯：</label>
+                                        <div class="col-xs-3 ">11230
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <label for="uEmail" class="col-xs-2 control-label">手机号：</label>
+                                        <div class="col-xs-3 ">
+                                            xxxx@qq.com
+                                        </div>
+                                        <label for="uPhone" class="col-xs-2 control-label">身份证：</label>
+                                        <div class="col-xs-3 ">11230
+                                        </div>
+                                    </div>
+                            </div>
+
+
+
+
+                            <div class="row control-label" style="font-size: 15px; padding-left: 10px;"><span class="glyphicon glyphicon-info-sign small"></span>认证信息</div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <label for="uName" class="col-xs-3 control-label">职业信息：</label>
+                                    <div class="col-xs-4 ">
+                                        IT
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="uName" class="col-xs-3 control-label">芝麻信用分：</label>
+                                    <div class="col-xs-4 ">
+                                        606
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="uName" class="col-xs-3 control-label">证件信息：</label>
+                                    <div class="col-xs-4 ">
+                                        银行卡身份证信息
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                            <button type="button" class="btn btn-xs btn-green">保 存</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+
+
+            <!-- 新增房源信息设置模块 -->
+            <div role="tabpanel" class="tab-pane" id="houseResParams">
+                <div class="check-div form-inline">
+
+                </div>
+
+                <!-- 可以改用列表 -->
+                <!--表格列表-->
+                <div class="panel panel-default panel-bs-table-myself-style">
+                    <div class="panel-body col-md-8 col-md-offset-2">
+                        <div class="table-responsive">
+                            <form action="/house/resources" method="post" id="resourcesForm">
+                                <table class="table table-striped table-hover text-nowrap" id="params-table">
+                                    <!--table-bordered-->
+                                    <thead class="w-100">
+                                    <tr class="row">
+                                        房源信息
+                                    </tr>
+                                    </thead>
+                                    <tbody class="w-100">
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>楼盘名称:</span>
+                                        </td>
+                                        <td class="col-md-8">
+                                            <!--  <input type="text" id="inputFromSe" name="name" value="（进行数据库的实时查询）凯旋城1997 3室2厅 16000元">-->
+                                            <select name="name" id="searchNameInput" class="selectpicker form-control-sm" data-live-search="true">
+                                                <option value="">请选择楼盘</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-6 spanTd">
+                                            <span>楼盘地址:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputEstateAddr" name="address" disabled>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-6 spanTd">
+                                            <span>房源的标题:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputThreadNum00" name="title" >
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+
+                                        <td class="col-md-6 spanTd">
+                                            <span>楼栋:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputCron"  name="buildingNum" value="3">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-6 spanTd">
+                                            <span>单元:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputCron1"  name="buildingUnit" value="01">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-6 spanTd">
+                                            <span>门牌号:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputCron2"  name="buildingFloorNum" value="309">
+                                        </td>
+
+                                    </tr>
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>房源编号:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" disabled placeholder="（自动生成）" id="inputCharset">
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>租金:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputTimeOut"  name="rent" value="2021">
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>支付方式:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputRetryTimes"  name="">
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>租赁方式:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputProxy"  name="rentMethod" value="1">
+                                        </td>
+                                    </tr>
+
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>户型:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputProxy1"  name="houseType" value="1室1厅1卫1厨1阳台">
+                                        </td>
+                                    </tr>
+
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>建筑面积:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputProxy2"  name="coveredArea" value="20">
+                                        </td>
+                                    </tr>
+
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>使用面积:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputProxy3"  name="useArea" value="18">
+                                        </td>
+                                    </tr>
+
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>建筑年代:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputProxy4"  name="" >
+                                        </td>
+                                    </tr>
+
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>楼层:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputProxy5"  name="floor" value="3">
+                                        </td>
+                                    </tr>
+
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>配套设施:</span>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="facilities" value="水电">水电&nbsp;&nbsp;
+                                            <input type="checkbox" name="facilities" value="天然气">天然气&nbsp;&nbsp;
+                                            <input type="checkbox" name="facilities" value="暖气">暖气&nbsp;&nbsp;
+                                            <input type="checkbox" name="facilities" value="电视">电视&nbsp;&nbsp;
+                                            <input type="checkbox" name="facilities" value="宽带">宽带&nbsp;&nbsp;
+                                            <input type="checkbox" name="facilities" value="电梯">电梯&nbsp;&nbsp;
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+
+                                <!--                图片信息-->
+                                <table class="table table-striped table-hover text-nowrap" id="params-table1">
+                                    <!--table-bordered-->
+                                    <thead class="w-100">
+                                    <tr >
+                                        图片信息
+                                    </tr>
+                                    </thead>
+                                    <tbody class="w-100">
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>房源描述:</span>
+                                        </td>
+                                        <td>
+                                            <!--                                <textarea cols="2";   rows="6"  style=" OVERFLOW:"hidden"></textarea>-->
+                                            <textarea name="" id="" cols="20" rows="6"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-6 spanTd">
+                                            <span>室内图片:</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputThreadNum1" name="pic" value="temPic">
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+
+
+                                <!--                图片信息-->
+                                <table class="table table-striped table-hover text-nowrap" id="params-table2">
+                                    <!--table-bordered-->
+                                    <thead class="w-100">
+                                    <tr >
+                                        业主信息
+                                    </tr>
+                                    </thead>
+                                    <tbody class="w-100">
+                                    <tr >
+                                        <td class="col-md-6 ">
+                                            <span>业主：（联系方式）</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="inputFromSe1" name="mobile" value="1101101101101">
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>看房时间：</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="visitTime" name="time" value="1">
+                                        </td>
+                                    </tr>
+                                    <tr >
+                                        <td class="col-md-6 spanTd">
+                                            <span>物业费：</span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="manageFee" name="propertyCost" value="5">元/平米
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+
+                                <div class="row-col-md-12" style="text-align: center; background-color: white">
+<!--                                    data-toggle="modal"-->
+                                        <input class="btn btn-success btn-xs"
+                                               style=" margin-top: 10px;margin-bottom: 30px;"
+                                               id="addHouseResourceBtn"
+                                               type="button" value="提交" />
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!--租房请求管理模块-->
+            <div role="tabpanel" class="tab-pane" id="RentRequestModel">
+                <div class="check-div form-inline">
+                    <div class="col-xs-2">
+                        <button class="btn btn-yellow btn-xs" id="buttonRefresh">获取数据</button>
+                    </div>
+                </div>
+
+                <!-- 可以改用列表 -->
+                <!--表格列表-->
+                <div class="panel panel-bs-table-myself-style">
+                    <div class="panel-heading" id="RentRequest">租房请求</div>
+                    <div class="panel-body">
+                        <div class="table-responsive  container-fluid">
+
+<!--                            data-width="50px"-->
+                            <table id="roleTableRentRequest" data-toggle="#roleTable"
+                                   class="table table-striped table-hover table-bordered" >  <!-- data-detail-view="true"-->
+                            </table>   <!-- data-search="true"-->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>    <!--租房请求管理模块-->
+
+
+
+            <!--弹窗--租房请求详情窗口-->
+            <div class="modal fade" id="RentRequestDetailModel" role="dialog" aria-labelledby="gridSystemModalLabel"
+                 style="margin-top: 200px;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" >订单详情</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="progress-container">
+                                <div class="progress" id="progressRentRequest" style="width: 33.3333%; "></div>
+                                <div class="circle circleRentRequest active">1</div>
+                                <div class="circle circleRentRequest active">2</div>
+                                <div class="circle circleRentRequest">3</div>
+                                <div class="circle circleRentRequest">4</div>
+                            </div>
+
+                            <div class="progress-container">
+                                <div style="width: 40.3333%; padding-right: 10px;">提交租房申请</div>
+                                <div style="width: 40.3333%; padding-right: 10px;">房东确认</div>
+                                <div style="width: 40.3333%; padding-right: 10px;">签约（上传）</div>
+                                <div style="width: 40.3333%; ">完成</div>
+                            </div>
+
+                            <div class="container-fluid  progress-container" style="margin-left: 0px !important;">
+                                <div style="width: 40.3333%; padding-right: 10px;">小王<br>(2020-01-01 06:10:20)</div>
+                                <div style="width: 40.3333%; padding-right: 10px;">房东王八<br><a href="">催一下</a></div>
+                                <div style="width: 40.3333%; padding-right: 10px;"></div>
+                                <div style="width: 40.3333%; "></div>
+                            </div>
+
+
+                            <div class="container-fluid  progress-container" style="margin: 0px !important;">
+<!--                                //width: 40.3333%;-->
+                                <div style=" padding-right: 10px; font-size: 15px;" class="col-12" ><span class="glyphicon glyphicon-info-sign small"></span>房源信息<br>
+<!--                                    小区名称：中弘北京像素<br>-->
+<!--                                    小区地址：北京市朝阳区五里桥二街2号院5号楼1010<br>-->
+<!--                                    房屋配置：暖气 宽带 热水器 洗衣机-->
+
+                                    <div class="row col-12" style="padding-left: 20px !important;">小区名称：中弘北京像素</div>
+                                    <div class="row col-12" style="padding-left: 20px !important;">小区地址：北京市朝阳区五里桥二街2号院5号楼1010</div>
+                                    <div class="row col-12" style="padding-left: 20px !important;">房屋配置：暖气 宽带 热水器 洗衣机</div>
+
+                                </div>
+                            </div>
+
+                            <br>
+
+                            <div class="container-fluid  progress-container" style="margin-left: 0px !important;">
+                                <div class="col-xs-6" style="width: 40.3333%; padding-right: 10px; padding-left: 0px !important;"><span class="glyphicon glyphicon-info-sign small"></span>房东信息<br>(2020-01-01 06:10:20)</div>
+
+                                <div class="col-xs-6" style="width: 40.3333%; padding-right: 10px; padding-left: 0px !important;"><span class="glyphicon glyphicon-info-sign small"></span>租客信息<br>(2020-01-01 06:10:20)</div>
+
+                            </div>
+
+                            <br>
+
+                            <div class="container-fluid  progress-container" style="margin-left: 0px !important;">
+                                <div style="width: 40.3333%; padding-right: 10px;" class="col-12"><span class="glyphicon glyphicon-info-sign small"></span>合同信息<br>
+                                    合同起止时间：2018-05-22 至 2018-05-22 <br>
+                                    租金：3000元/月 <br>
+                                </div>
+                            </div>
+
+                            <button type="button" id="prev1" class="btn btn-default"
+                                    onclick="stepBarProcess('progressRentRequest','.circleRentRequest','prev');">Prev</button>
+                            <button type="button" id="next1" class="btn btn-default"
+                                    onclick="stepBarProcess('progressRentRequest','.circleRentRequest','next');">next</button>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                            <button type="button" class="btn  btn-xs btn-danger" id="btnRequestSure1">确 认</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+
+
+            <!--看房请求管理模块-->
+            <div role="tabpanel" class="tab-pane" id="VisitRequestModel">
+                <div class="check-div form-inline">
+                    <div class="col-xs-2">
+                        <button class="btn btn-yellow btn-xs" id="buttonRefreshVisit">获取数据</button>
+                    </div>
+                </div>
+
+                <!-- 可以改用列表 -->
+                <!--表格列表-->
+                <div class="panel panel-bs-table-myself-style">
+                    <div class="panel-heading" id="VisitRequest">看房请求</div>
+                    <div class="panel-body">
+                        <div class="table-responsive  container-fluid">
+
+                            <!--                            data-width="50px"-->
+                            <table id="roleTableVisitRequest" data-toggle="#roleTable"
+                                   class="table table-striped table-hover table-bordered" >  <!-- data-detail-view="true"-->
+                            </table>   <!-- data-search="true"-->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>    <!--看房请求管理模块-->
+
+
+            <!--弹窗--看房请求详情窗口-->
+            <div class="modal fade" id="VisitRequestDetailModel" role="dialog" aria-labelledby="gridSystemModalLabel"
+                 style="margin-top: 200px;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" >看房进度</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="progress-container">
+                                <div class="progress" id="progress" style="width: 33.3333%; "></div>
+                                <div class="circle circleVisitRequest active">1</div>
+                                <div class="circle circleVisitRequest active">2</div>
+                                <div class="circle circleVisitRequest">3</div>
+                                <div class="circle circleVisitRequest">4</div>
+                            </div>
+
+                            <div class="progress-container">
+                                <div style="width: 40.3333%; padding-right: 10px;">提交申请</div>
+                                <div style="width: 40.3333%; padding-right: 10px;">房东确认</div>
+                                <div style="width: 40.3333%; padding-right: 10px;">线下看房</div>
+                                <div style="width: 40.3333%; ">完成</div>
+                            </div>
+
+                            <div class="progress-container">
+                                <div style="width: 40.3333%; padding-right: 10px;">用户张<br>(2020-01-01 06:10:20)</div>
+                                <div style="width: 40.3333%; padding-right: 10px;">房东王八<br><a href="">催一下</a></div>
+                                <div style="width: 40.3333%; padding-right: 10px;"></div>
+                                <div style="width: 40.3333%; "></div>
+                            </div>
+
+                            <!-- proId,circlesSelctor,actio-->
+                            <button type="button" id="prev" class="btn btn-default"
+                                    onclick="stepBarProcess('progress','.circleVisitRequest','prev');">Prev</button>
+                            <button type="button" id="next" class="btn btn-default"
+                                    onclick="stepBarProcess('progress','.circleVisitRequest','next');">next</button>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                            <button type="button" class="btn  btn-xs btn-danger" id="btnRequestSure2">确 认</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+
+
+
+            <!--房东列表管理模块-->
+            <div role="tabpanel" class="tab-pane" id="landlordModel">
+                <div class="check-div form-inline">
+                    <div class="col-xs-2">
+                        <button class="btn btn-yellow btn-xs" id="getLandlords" >获取数据</button>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="col-xs-5"><span>查询项目:&nbsp;</span></div>
+                        <label>
+                            <div style="display: inline">
+                                <select class=" form-control" id="searchLandlords">
+                                    <option value="nofield">模糊查询</option>
+                                    <option value="id">房东id</option>
+                                    <option value="email">房东邮箱</option>
+                                    <option value="phone">房东手机</option>
+                                </select>
+                            </div>
+                        </label>
+
+                    </div>
+
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control input-sm" placeholder="输入文字搜索" id="SearchContent1">
+                        <button class="btn btn-white btn-xs " id="btnSearchLandlords" onclick="">查 询
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- 可以改用列表 -->
+                <!--表格列表-->
+                <div class="panel panel-bs-table-myself-style">
+                    <div class="panel-heading" id="landlordList">房东列表</div>
+                    <div class="panel-body">
+                        <div class="table-responsive  container-fluid">
+
+                            <!--                            data-width="50px"-->
+                            <table id="roleTableLandLords" data-toggle="#roleTable"
+                                   class="table table-striped table-hover table-bordered" >  <!-- data-detail-view="true"-->
+                            </table>   <!-- data-search="true"-->
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>    <!--房东列表管理模块-->
+
+
+            <!--弹出房东详情窗口-->
+            <div class="modal fade" id="landlordsDetailModal" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">房东详情</h4>   <!--id="gridSystemModalLabel"-->
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="container-fluid  progress-container" style="margin: 0px !important;">
+                                <!--                                //width: 40.3333%;-->
+                                <div style=" padding-right: 10px; font-size: 15px;" class="col-12" >
+                                    <span class="glyphicon glyphicon-info-sign small"></span>房源信息<br>
+                                    <!--                                    小区名称：中弘北京像素<br>-->
+                                    <!--                                    小区地址：北京市朝阳区五里桥二街2号院5号楼1010<br>-->
+                                    <!--                                    房屋配置：暖气 宽带 热水器 洗衣机-->
+
+                                    <div class="row col-12" style="padding-left: 20px !important; margin-top: 10px;margin-bottom: 10px;">小区名称：中弘北京像素</div>
+                                    <div class="row col-12" style="padding-left: 20px !important; margin-top: 10px;margin-bottom: 10px;">小区地址：北京市朝阳区五里桥二街2号院5号楼1010</div>
+                                    <div class="row col-12" style="padding-left: 20px !important; margin-top: 10px;margin-bottom: 10px;">房屋配置：暖气 宽带 热水器 洗衣机</div>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row control-label" style="font-size: 15px; padding-left: 10px;">
+                                <span class="glyphicon glyphicon-info-sign small"></span>房东信息</div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <label for="" class="col-xs-3 control-label">姓名：</label>
+                                    <div class="col-xs-4 ">
+                                        陈IT
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="" class="col-xs-3 control-label">电话：</label>
+                                    <div class="col-xs-4 ">
+                                        256648821
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <label for="" class="col-xs-3 control-label">身份证号：</label>
+                                    <div class="col-xs-4 ">
+                                        215415481856648821
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="" class="col-xs-3 control-label">证件信息：</label>
+                                    <div class="col-xs-4 ">
+                                        银行卡身份证信息（图片）
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                            <button type="button" class="btn btn-xs btn-green">保 存</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+</html>
+
+<!--<script src="source/js/bg.js"></script>-->
+<script type="application/javascript" src="js/backstageJs.js" ></script>
+<script type="application/javascript" src="js/stepBar.js" ></script>
+<script type="application/javascript" src="js/selectorJs.js" ></script>
+
+<script>
+
+    $('#addHouseResourceBtn').on('click',function () {
+        // var formData = $('#resourcesForm').serialize();
+        // console.log("查看表格数据-----------");
+        // console.log("typeof formData: " + typeof formData);
+        // jQuery.each(formData, function (index, value) {
+        //     console.log(index + "---" + value);
+        // });
+
+        //处理checkbox数据
+        var checkboxes = document.getElementsByName('facilities');
+        //这里我们定义数组存放checkbox的值，为什么以数组定义呢？这样我们在后台获取数据时才可以//
+        //用","进行分割
+        console.log("已选择的cb：")
+        var value = [];
+        for(let i = 0; i < checkboxes.length; i++){
+            if(checkboxes[i].checked){
+                value.push(checkboxes[i].value);
+                console.log(checkboxes[i].value);
+            }
+        }
+        // window.location = '*****.do?value=' + value.toString();  //把value转化为字符串作为参数传到后台
+        console.log($('#resourcesForm').serialize());
+        $.ajax({
+            method: "post",
+            data: {
+                "formData": JSON.stringify($('#resourcesForm').serializeJSON()),
+                "facilities": JSON.stringify(value)
+            },//jq提供的获取form表单数据的快捷方式，通过form内标签的name属性{"username":"admin","passwd":"123456"}
+
+            dataType: "json",
+
+
+            url: "/house/resources",
+            success: function (data) {//请求数据并返回结果给success,是一个对象，类似python的字典。回调函数。data只是一个函数的参数，跟上面的data不一样
+                console.log(data);
+
+                if (data.error_code == 0) {//登陆成功，error_code=0。因为data是字典格式，可用点获取到
+                    //成功
+                    var sign = data.login_info.sign;//获取接口返回信息
+                    var userid = data.login_info.userId;
+                    console.log(sign);
+                    console.log(userid);
+
+//                    拼接要显示的内容的标签
+                    var sign_span = '<div><span>' + sign + '</span></div>';
+                    var userid_span = '<div><span>' + userid + '</span></div>';
+                    var form_object = document.getElementById('login_value');//获取到form对象
+                    form_object.insertAdjacentHTML('afterEnd', sign_span + userid_span)//插入到获取标签的最后
+
+                } else {
+                    alert(data.msg)
+                }
+            }
+
+        });
+
+
+
+    });
+
+//     function login() {
+//         var flag = confirm('你确认登陆么');//confirm时确认提示框，点击确认返回true,点击取消返回falseif(flag){//点击弹框的确认
+//         $.ajax({
+//             method: "post",
+//             data: $('#login_value').serialize(),//jq提供的获取form表单数据的快捷方式，通过form内标签的name属性{"username":"admin","passwd":"123456"}
+//             url: "http://localhost/api/user/login",
+//             success: function (data) {//请求数据并返回结果给success,是一个对象，类似python的字典。回调函数。data只是一个函数的参数，跟上面的data不一样
+// //                    console.log(data);
+//
+//                 if (data.error_code == 0) {//登陆成功，error_code=0。因为data是字典格式，可用点获取到
+//                     //成功
+//                     var sign = data.login_info.sign;//获取接口返回信息
+//                     var userid = data.login_info.userId;
+//                     console.log(sign);
+//                     console.log(userid);
+//
+// //                    拼接要显示的内容的标签
+//                     var sign_span = '<div><span>' + sign + '</span></div>';
+//                     var userid_span = '<div><span>' + userid + '</span></div>';
+//                     var form_object = document.getElementById('login_value');//获取到form对象
+//                     form_object.insertAdjacentHTML('afterEnd', sign_span + userid_span)//插入到获取标签的最后
+//                     /*
+//                     *
+//                     * insertAdjacentHTML(where,tagStr): 父级标签内添加一个子标签字符串
+//                     beforeBegin: 插入到获取到标签的前面
+//                     afterBegin: 插入到获取到标签的子标签的前面
+//                     beforeEnd: 插入到获取到标签的子标签的后面
+//                     afterEnd: 插入到获取到标签的后面
+//                     */
+//                 } else {
+//                     alert(data.msg)
+//                 }
+//             }
+//
+//         })
+//
+//     }
+
+</script>

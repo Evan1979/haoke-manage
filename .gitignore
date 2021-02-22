@@ -1,0 +1,3 @@
+# Project exclude paths
+/hk-manage-api-server/target/
+/hk-manage-dubbo-server/hk-manage-dubbo-server-house-resources/target/
